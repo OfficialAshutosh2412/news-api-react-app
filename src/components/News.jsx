@@ -12,6 +12,8 @@ const News = () => {
   const [error, setError] = useState("");
   //loader on click
   const [loader, setLoader] = useState(false);
+  //active pill state
+  const [active, setActive] = useState("");
   const category = [
     "all",
     "sports",
@@ -19,7 +21,7 @@ const News = () => {
     "entertainment",
     "health",
     "fitness",
-    "market",
+    "tmarket",
     "trading",
     "bitcoin",
     "rupee",
@@ -35,7 +37,6 @@ const News = () => {
       (item) => item.title != "[Removed]"
     );
     setNews(fillterData);
-    console.log(fillterData);
   };
   //calling get news function on load
   useEffect(() => {
@@ -76,22 +77,22 @@ const News = () => {
   };
   //pills function
   const pills = (query) => {
+    setActive(query);
     customInputSearch(query);
   };
   //returning
   return (
     <>
-      <section className=" text-gray-200 flex justify-between items-center p-3 shadow-md shadow-blue-950 ">
-        <h1 className="font-bold w-full pl-20">Trendy News</h1>
-        <div className="flex gap-5 justify-center text-sm w-full">
-          <a href="#">All News</a>
-          <a href="#">Trending</a>
-        </div>
-        <div className="w-full text-right pr-20 flex items-center justify-center">
+      <section className=" text-gray-200  flex flex-col sm:flex-row justify-between items-center p-3 shadow-md shadow-blue-950 ">
+        <h1 className="font-bold w-full sm:pl-20 sm:text-xl text-4xl sm:mb-0 mb-5 sm:text-left text-center ">
+          News Today
+        </h1>
+
+        <div className="w-full text-right sm:pr-20 pr-0 flex items-center sm:justify-end   justify-center">
           <input
             type="text"
             placeholder="search topic"
-            className="rounded-tl-full rounded-bl-full h-8 p-5 outline-none text-sm bg-indigo-900 shadow-sm shadow-indigo-500"
+            className="rounded-tl-full rounded-bl-full h-8 sm:w-52 w-96 p-5 outline-none text-sm bg-indigo-900 shadow-sm shadow-indigo-500"
             onChange={(e) => setSearch(e.target.value)}
           />
           <button
@@ -106,53 +107,8 @@ const News = () => {
         <h3 className="text-white capitalize text-4xl text-center font-light">
           stay updated with trendy news
         </h3>
-        <Pills categoryName={category} pills={pills} />
-        {/* <div className="mt-10 flex justify-center items-center gap-10">
-          <button
-            onClick={() => pills("all")}
-            className="bg-red-800 text-white p-1 pl-4 pr-4 rounded-full text-xs capitalize"
-          >
-            all
-          </button>
-          <button
-            onClick={() => pills("sports")}
-            className="bg-red-800 text-white p-1 pl-4 pr-4 rounded-full text-xs capitalize"
-          >
-            sports
-          </button>
-          <button
-            className="bg-red-800 text-white p-1 pl-4 pr-4 rounded-full text-xs capitalize"
-            onClick={() => pills("politics")}
-          >
-            politics
-          </button>
-          <button
-            className="bg-red-800 text-white p-1 pl-4 pr-4 rounded-full text-xs capitalize"
-            onClick={() => pills("entertainment")}
-          >
-            entertainment
-          </button>
-          <button
-            className="bg-red-800 text-white p-1 pl-4 pr-4 rounded-full text-xs capitalize"
-            onClick={() => pills("health")}
-          >
-            health
-          </button>
-          <button
-            className="bg-red-800 text-white p-1 pl-4 pr-4 rounded-full text-xs capitalize"
-            onClick={() => pills("fitness")}
-          >
-            fitness
-          </button>
-          <button
-            className="bg-red-800 text-white p-1 pl-4 pr-4 rounded-full text-xs capitalize"
-            onClick={() => pills("stock market")}
-          >
-            stock market
-          </button>
-        </div> */}
+        <Pills categoryName={category} pills={pills} activeness={active} />
       </section>
-
       {loader ? (
         <Loader />
       ) : (
