@@ -2,7 +2,7 @@ import React from "react";
 
 const Pills = ({ categoryName, pills, activeness }) => {
   return (
-    <div className="mt-10 flex justify-start items-center gap-5 w-4/5 m-auto flex-wrap">
+    <div className="mt-10 flex justify-start items-center gap-1 w-4/5 m-auto flex-wrap">
       {categoryName.map((category, index) => (
         <button
           key={index}

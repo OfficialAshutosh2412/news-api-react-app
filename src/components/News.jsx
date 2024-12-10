@@ -15,22 +15,25 @@ const News = () => {
   //active pill state
   const [active, setActive] = useState("");
   const category = [
+    "international",
+    "indian",
     "all",
     "sports",
     "politics",
     "entertainment",
     "health",
     "fitness",
-    "tmarket",
+    "market",
     "trading",
     "bitcoin",
     "rupee",
     "jobs",
+    "election",
   ];
   //get news on load
   const getNews = async () => {
     let res = await fetch(
-      `https://newsapi.org/v2/everything?q=india&apiKey=56838e8f8b76477c99d24dd2c84c1a4c`
+      `https://newsapi.org/v2/everything?q=indian&apiKey=56838e8f8b76477c99d24dd2c84c1a4c`
     );
     let jsonRes = await res.json();
     let fillterData = jsonRes.articles.filter(
@@ -60,6 +63,7 @@ const News = () => {
       }
       setError("");
       setNews(fillterData);
+      setSearch("");
     } catch (error) {
       setError("failed to fetch data...");
     } finally {
@@ -93,6 +97,7 @@ const News = () => {
             type="text"
             placeholder="search topic"
             className="rounded-tl-full rounded-bl-full h-8 sm:w-52 w-96 p-5 outline-none text-sm bg-indigo-900 shadow-sm shadow-indigo-500"
+            value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
           <button
